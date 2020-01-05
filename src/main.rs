@@ -1,8 +1,11 @@
 use structopt::StructOpt;
 #[macro_use] extern crate text_io;
+extern crate termcolor;
 extern crate rand;
 
 use rand::Rng;
+use std::io::Write;
+use termcolor::{Color, ColorChoice, ColorSpec, StandardStream, WriteColor};
 
 #[derive(StructOpt)]
 #[structopt(name = "learn-multiply", about = "Practice your multiplication!")]
@@ -24,7 +27,7 @@ fn main() {
     assert!(opts.min <= opts.max);
     let mut rng = rand::thread_rng();
     for i in 0..opts.problems {
-        println!("Problem [{}/{}]", i + 1, opts.problems);
+        println!("Problem {} of {}", i + 1, opts.problems);
         println!("");
         let a = rng.gen_range(opts.min, opts.max);
         let b = rng.gen_range(opts.min, opts.max);
@@ -38,10 +41,14 @@ fn problem(a: i32, b: i32) {
     println!("-----");
     let result: i32 = read!();
     let expected = a * b;
+    let mut stdout = StandardStream::stdout(ColorChoice::Always);
     if result == expected {
+        stdout.set_color(ColorSpec::new().set_fg(Some(Color::Green)));
         println!("CORRECT!");
     } else {
+        stdout.set_color(ColorSpec::new().set_fg(Some(Color::Red)));
         println!("Nice try! Correct answer: {}", result);
     }
+    stdout.set_color(ColorSpec::new().set_fg(Some(Color::White)));
     println!("");
 }

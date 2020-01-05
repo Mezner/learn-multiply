@@ -24,7 +24,7 @@ fn main() {
     assert!(opts.min <= opts.max);
     let mut rng = rand::thread_rng();
     for i in 0..opts.problems {
-        println!("Problem [{}/{}]", i, opts.problems);
+        println!("Problem [{}/{}]", i + 1, opts.problems);
         println!("");
         let a = rng.gen_range(opts.min, opts.max);
         let b = rng.gen_range(opts.min, opts.max);

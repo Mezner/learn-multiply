@@ -4,7 +4,6 @@ extern crate termcolor;
 extern crate rand;
 
 use rand::Rng;
-use std::io::Write;
 use termcolor::{Color, ColorChoice, ColorSpec, StandardStream, WriteColor};
 
 #[derive(StructOpt)]
@@ -25,14 +24,25 @@ fn main() {
     let opts = Opts::from_args();
     // Lazy error checking.
     assert!(opts.min <= opts.max);
-    let mut rng = rand::thread_rng();
-    for i in 0..opts.problems {
+    let problems = generate_problems(&opts);
+    for (i, p) in problems.iter().enumerate() {
         println!("Problem {} of {}", i + 1, opts.problems);
         println!("");
+        problem(p.0, p.1);
+    }
+}
+
+fn generate_problems(opts: &Opts) -> Vec<(i32, i32)> {
+    let mut problems = Vec::new();
+    let mut rng = rand::thread_rng();
+    while problems.len() < opts.problems {
         let a = rng.gen_range(opts.min, opts.max);
         let b = rng.gen_range(opts.min, opts.max);
-        problem(a, b);
+        if !problems.contains(&(a, b)) {
+            problems.push((a, b));
+        }
     }
+    problems
 }
 
 fn problem(a: i32, b: i32) {

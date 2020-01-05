@@ -53,12 +53,12 @@ fn problem(a: i32, b: i32) {
     let expected = a * b;
     let mut stdout = StandardStream::stdout(ColorChoice::Always);
     if result == expected {
-        stdout.set_color(ColorSpec::new().set_fg(Some(Color::Green)));
+        stdout.set_color(ColorSpec::new().set_fg(Some(Color::Green))).unwrap();
         println!("CORRECT!");
     } else {
-        stdout.set_color(ColorSpec::new().set_fg(Some(Color::Red)));
+        stdout.set_color(ColorSpec::new().set_fg(Some(Color::Red))).unwrap();
         println!("Nice try! Correct answer: {}", result);
     }
-    stdout.set_color(ColorSpec::new().set_fg(Some(Color::White)));
+    stdout.set_color(ColorSpec::new().set_fg(Some(Color::White))).unwrap();
     println!("");
 }

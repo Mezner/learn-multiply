@@ -10,13 +10,13 @@ use termcolor::{Color, ColorChoice, ColorSpec, StandardStream, WriteColor};
 #[structopt(name = "learn-multiply", about = "Practice your multiplication!")]
 struct Opts {
     /// Minimum number
-    #[structopt(name = "min", default_value = "1")]
+    #[structopt(long, default_value = "1")]
     min: i32,
     /// Maximum number
-    #[structopt(name = "max", default_value = "12")]
+    #[structopt(long, default_value = "12")]
     max: i32,
     /// Number of problems to solve
-    #[structopt(name = "problems", default_value = "25")]
+    #[structopt(long, default_value = "25")]
     problems: usize
 }
 

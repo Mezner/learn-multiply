@@ -49,7 +49,11 @@ fn problem(a: i32, b: i32) {
     println!("  {: >3}", a);
     println!("x {: >3}", b);
     println!("-----");
-    let result: i32 = read!();
+    let result : i32 = loop {
+        if let Ok(value) = try_read!() {
+            break value
+        }
+    };
     let expected = a * b;
     let mut stdout = StandardStream::stdout(ColorChoice::Always);
     if result == expected {

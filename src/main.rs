@@ -61,7 +61,7 @@ fn problem(a: i32, b: i32) {
         println!("CORRECT!");
     } else {
         stdout.set_color(ColorSpec::new().set_fg(Some(Color::Red))).unwrap();
-        println!("Nice try! Correct answer: {}", result);
+        println!("Nice try! Correct answer: {}", expected);
     }
     stdout.set_color(ColorSpec::new().set_fg(Some(Color::White))).unwrap();
     println!("");
